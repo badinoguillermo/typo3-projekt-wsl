@@ -1,0 +1,26 @@
+base: 'https://typo3-projekt.ddev.site/leipzig'
+dependencies:
+  - typo3/theme-camino
+languages:
+  -
+    title: English
+    enabled: true
+    languageId: 0
+    base: /
+    locale: en_US.UTF-8
+    navigationTitle: English
+    flag: us
+  -
+    title: German
+    enabled: true
+    locale: de_DE
+    hreflang: de-DE
+    base: /de/
+    websiteTitle: Leipzig
+    navigationTitle: Deutsch
+    fallbackType: strict
+    fallbacks: '0'
+    flag: de
+    languageId: 1
+rootPageId: 8
+websiteTitle: ''

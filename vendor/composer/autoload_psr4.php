@@ -12,6 +12,7 @@ return array(
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'TYPO3\\HtmlSanitizer\\' => array($vendorDir . '/typo3/html-sanitizer/src'),
     'TYPO3\\ClassAliasLoader\\' => array($vendorDir . '/typo3/class-alias-loader/src'),
+    'TYPO3\\CMS\\Workspaces\\' => array($vendorDir . '/typo3/cms-workspaces/Classes'),
     'TYPO3\\CMS\\Webhooks\\' => array($vendorDir . '/typo3/cms-webhooks/Classes'),
     'TYPO3\\CMS\\Viewpage\\' => array($vendorDir . '/typo3/cms-viewpage/Classes'),
     'TYPO3\\CMS\\Tstemplate\\' => array($vendorDir . '/typo3/cms-tstemplate/Classes'),

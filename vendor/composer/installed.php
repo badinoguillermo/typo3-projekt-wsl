@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'typo3/cms-base-distribution',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'b7a30f0b1a808a864dc94da1e92b18a4eeb8ae12',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -823,9 +823,9 @@
             'dev_requirement' => false,
         ),
         'typo3/cms-base-distribution' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'b7a30f0b1a808a864dc94da1e92b18a4eeb8ae12',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1089,6 +1089,12 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'typo3/cms-version' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => 'v14.3.10',
+            ),
+        ),
         'typo3/cms-viewpage' => array(
             'pretty_version' => 'v14.3.10',
             'version' => '14.3.10.0',
@@ -1118,6 +1124,15 @@
             'replaced' => array(
                 0 => 'v14.3.10',
             ),
+        ),
+        'typo3/cms-workspaces' => array(
+            'pretty_version' => 'v14.3.10',
+            'version' => '14.3.10.0',
+            'reference' => 'e3947ffc8af77bfd7c559475b39fb39b70aebfeb',
+            'type' => 'typo3-cms-framework',
+            'install_path' => __DIR__ . '/../typo3/cms-workspaces',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'typo3/html-sanitizer' => array(
             'pretty_version' => 'v2.3.2',

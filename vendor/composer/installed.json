@@ -8006,6 +8006,77 @@
             "install-path": "../typo3/cms-webhooks"
         },
         {
+            "name": "typo3/cms-workspaces",
+            "version": "v14.3.10",
+            "version_normalized": "14.3.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TYPO3-CMS/workspaces.git",
+                "reference": "e3947ffc8af77bfd7c559475b39fb39b70aebfeb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TYPO3-CMS/workspaces/zipball/e3947ffc8af77bfd7c559475b39fb39b70aebfeb",
+                "reference": "e3947ffc8af77bfd7c559475b39fb39b70aebfeb",
+                "shasum": ""
+            },
+            "require": {
+                "typo3/cms-core": "14.3.10"
+            },
+            "conflict": {
+                "typo3/cms": "*"
+            },
+            "replace": {
+                "typo3/cms-version": "self.version"
+            },
+            "time": "2026-10-22T08:51:04+00:00",
+            "published-time": "2026-10-22T08:58:03+00:00",
+            "type": "typo3-cms-framework",
+            "extra": {
+                "typo3/cms": {
+                    "extension-key": "workspaces"
+                },
+                "branch-alias": {
+                    "dev-main": "14.3.x-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "TYPO3\\CMS\\Workspaces\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "TYPO3 Core Team",
+                    "email": "typo3cms@typo3.org",
+                    "role": "Developer"
+                }
+            ],
+            "description": "TYPO3 CMS Workspaces - Workflows with custom stages and versioning for a better editing and publishing experience.",
+            "homepage": "https://typo3.community/",
+            "support": {
+                "chat": "https://typo3.community/meet/slack/",
+                "docs": "https://docs.typo3.org/c/typo3/cms-workspaces/main/en-us/",
+                "forum": "https://talk.typo3.org/",
+                "issues": "https://forge.typo3.org/issues/",
+                "rss": "https://news.typo3.com/rss/",
+                "security": "https://typo3.org/security/",
+                "source": "https://github.com/TYPO3/typo3/"
+            },
+            "funding": [
+                {
+                    "url": "https://typo3.org/membership",
+                    "type": "membership"
+                }
+            ],
+            "install-path": "../typo3/cms-workspaces"
+        },
+        {
             "name": "typo3/html-sanitizer",
             "version": "v2.3.2",
             "version_normalized": "2.3.2.0",

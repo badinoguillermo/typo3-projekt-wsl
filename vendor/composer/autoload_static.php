@@ -48,6 +48,7 @@ class ComposerStaticInit604feb0883ed11ba1fd9f782d2be38c6
         array (
             'TYPO3\\HtmlSanitizer\\' => 20,
             'TYPO3\\ClassAliasLoader\\' => 23,
+            'TYPO3\\CMS\\Workspaces\\' => 21,
             'TYPO3\\CMS\\Webhooks\\' => 19,
             'TYPO3\\CMS\\Viewpage\\' => 19,
             'TYPO3\\CMS\\Tstemplate\\' => 21,
@@ -198,6 +199,10 @@ class ComposerStaticInit604feb0883ed11ba1fd9f782d2be38c6
         'TYPO3\\ClassAliasLoader\\' =>
         array (
             0 => __DIR__ . '/..' . '/typo3/class-alias-loader/src',
+        ),
+        'TYPO3\\CMS\\Workspaces\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/typo3/cms-workspaces/Classes',
         ),
         'TYPO3\\CMS\\Webhooks\\' =>
         array (
