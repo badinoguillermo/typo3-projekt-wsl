@@ -1,0 +1,16 @@
+import{Command as d,Plugin as l}from"@ckeditor/ckeditor5-core";import{findOptimalInsertionRange as h,toWidget as z,Widget as g}from"@ckeditor/ckeditor5-widget";import{IconHorizontalLine as p}from"@ckeditor/ckeditor5-icons";import{ButtonView as L,MenuBarMenuListItemButtonView as f}from"@ckeditor/ckeditor5-ui";/**
+* @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
+* For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
+*//**
+* @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
+* For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
+*/var s=class extends d{refresh(){const t=this.editor.model,e=t.schema,n=t.document.selection;this.isEnabled=E(n,e,t)}execute(){const t=this.editor.model;t.change(e=>{const n=e.createElement("horizontalLine");t.insertObject(n,null,null,{setSelection:"after"})})}};function E(t,e,n){const i=H(t,n);return e.checkChild(i,"horizontalLine")}function H(t,e){const n=h(t,e).start.parent;return n.isEmpty&&!n.is("rootElement")?n.parent:n}/**
+* @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
+* For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
+*/var c=class extends l{static get pluginName(){return"HorizontalLineEditing"}static get isOfficialPlugin(){return!0}init(){const t=this.editor,e=t.model.schema,n=t.t,i=t.conversion;e.register("horizontalLine",{inheritAllFrom:"$blockObject"}),i.for("dataDowncast").elementToElement({model:"horizontalLine",view:(r,{writer:o})=>o.createEmptyElement("hr")}),i.for("editingDowncast").elementToStructure({model:"horizontalLine",view:(r,{writer:o})=>{const u=n("Horizontal line"),a=o.createContainerElement("div",null,o.createEmptyElement("hr"));return o.addClass("ck-horizontal-line",a),o.setCustomProperty("hr",!0,a),v(a,o,u)}}),i.for("upcast").elementToElement({view:"hr",model:"horizontalLine"}),t.commands.add("horizontalLine",new s(t))}};function v(t,e,n){return e.setCustomProperty("horizontalLine",!0,t),z(t,e,{label:n})}/**
+* @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
+* For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
+*/var m=class extends l{static get pluginName(){return"HorizontalLineUI"}static get isOfficialPlugin(){return!0}init(){const t=this.editor;t.ui.componentFactory.add("horizontalLine",()=>{const e=this._createButton(L);return e.set({tooltip:!0}),e}),t.ui.componentFactory.add("menuBar:horizontalLine",()=>this._createButton(f))}_createButton(t){const e=this.editor,n=e.locale,i=e.commands.get("horizontalLine"),r=new t(e.locale),o=n.t;return r.set({label:o("Horizontal line"),icon:p}),r.bind("isEnabled").to(i,"isEnabled"),this.listenTo(r,"execute",()=>{e.execute("horizontalLine"),e.editing.view.focus()}),r}};/**
+* @license Copyright (c) 2003-2026, CKSource Holding sp. z o.o. All rights reserved.
+* For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-licensing-options
+*/var b=class extends l{static get requires(){return[c,m,g]}static get pluginName(){return"HorizontalLine"}static get isOfficialPlugin(){return!0}};export{b as HorizontalLine,s as HorizontalLineCommand,c as HorizontalLineEditing,m as HorizontalLineUI};

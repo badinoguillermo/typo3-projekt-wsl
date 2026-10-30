@@ -1,0 +1,229 @@
+<?php
+
+declare(strict_types=1);
+
+/*
+ * This file is part of the TYPO3 CMS project.
+ *
+ * It is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License, either version 2
+ * of the License, or any later version.
+ *
+ * For the full copyright and license information, please read the
+ * LICENSE.txt file that was distributed with this source code.
+ *
+ * The TYPO3 project - inspiring people to share!
+ */
+
+namespace TYPO3\CMS\Core\Package\Cache;
+
+use TYPO3\CMS\Core\Package\Exception\PackageManagerCacheUnavailableException;
+use TYPO3\CMS\Core\Package\Exception\PackageStatesUnavailableException;
+use TYPO3\CMS\Core\Package\PackageInterface;
+use TYPO3\CMS\Core\Package\PackageManager;
+use TYPO3\CMS\Core\Serializer\DeserializationService;
+
+/**
+ * A TYPO3 Package cache entry.
+ * Represents a concrete state of TYPO3 packages.
+ * It interfaces between PackageManager and PackageCacheInterface.
+ *
+ * @internal
+ *
+ * @phpstan-import-type PackageKey from PackageManager
+ * @phpstan-import-type PackageName from PackageManager
+ * @phpstan-import-type StatesConfiguration from PackageManager
+ * @phpstan-type CacheArray array{
+ *     identifier: string|null,
+ *     packageStatesConfiguration: StatesConfiguration,
+ *     packageAliasMap: array<PackageName, PackageKey>,
+ *     composerNameToPackageKeyMap: array<PackageName, PackageKey>,
+ *     packageObjects: string,
+ *     packageClasses: list<class-string>,
+ * }
+ */
+class PackageCacheEntry
+{
+    /**
+     * Package configuration. Used by the PackageManager to identify "active" packages.
+     * Every key in this array represents an active extension.
+     *
+     * @var StatesConfiguration
+     */
+    private array $configuration;
+
+    /**
+     * Alternative names for packages mapping to the package key.
+     * Typically filled from replace section in composer.json
+     *
+     * @var array<PackageName, PackageKey>
+     */
+    private array $aliasMap;
+
+    /**
+     * Map from composer name of a package (key in this array) to its package key (value)
+     *
+     * @var array<PackageName, PackageKey>
+     */
+    private array $composerNameMap;
+
+    /**
+     * @var array<PackageKey, PackageInterface>
+     */
+    private array $packages;
+
+    /**
+     * Identifier for the current state, which can optionally
+     * stored in the cache entry or artifact.
+     * Currently, only used in Composer mode, where the identifier
+     * is comprised from the composer.lock file and stored alongside the artifact.
+     */
+    private ?string $identifier = null;
+
+    /**
+     * @param StatesConfiguration $configuration
+     * @param array<PackageName, PackageKey> $aliasMap
+     * @param array<PackageName, PackageKey> $composerNameMap
+     * @param array<PackageKey, PackageInterface> $packages
+     */
+    private function __construct(
+        array $configuration,
+        array $aliasMap,
+        array $composerNameMap,
+        array $packages
+    ) {
+        $this->configuration = $configuration;
+        $this->aliasMap = $aliasMap;
+        $this->composerNameMap = $composerNameMap;
+        $this->packages = $packages;
+    }
+
+    /**
+     * Validates whether the configuration has the correct version
+     *
+     * @throws PackageStatesUnavailableException
+     */
+    public static function ensureValidPackageConfiguration(array $configuration): void
+    {
+        if (($configuration['version'] ?? 0) < 5) {
+            throw new PackageStatesUnavailableException('The PackageStates.php file is either corrupt or unavailable.', 1381507733);
+        }
+    }
+
+    /**
+     * @param StatesConfiguration $packageStatesConfiguration
+     * @param array<PackageName, PackageKey> $packageAliasMap
+     * @param array<PackageName, PackageKey> $composerNameToPackageKeyMap
+     * @param array<PackageKey, PackageInterface> $packageObjects
+     */
+    public static function fromPackageData(
+        array $packageStatesConfiguration,
+        array $packageAliasMap,
+        array $composerNameToPackageKeyMap,
+        array $packageObjects
+    ): self {
+        self::ensureValidPackageConfiguration($packageStatesConfiguration);
+
+        return new self(
+            $packageStatesConfiguration,
+            $packageAliasMap,
+            $composerNameToPackageKeyMap,
+            $packageObjects
+        );
+    }
+
+    /**
+     * @param CacheArray $packageData
+     */
+    public static function fromCache(array $packageData): self
+    {
+        try {
+            self::ensureValidPackageConfiguration($packageData['packageStatesConfiguration'] ?? []);
+        } catch (PackageStatesUnavailableException $e) {
+            // Invalidate the cache entry
+            throw new PackageManagerCacheUnavailableException('The package state cache could not be loaded.', 1393883341, $e);
+        }
+        // Package objects can now contain classes from userland.
+        // We nevertheless restrict the unserialize call here to classes,
+        // that have been identified during caching.
+        // Yes, this list of classes could be tainted, but then, why not taint,
+        // the complete cache file directly? A tainted list of class names isn't
+        // really less obvious than other PHP code in the cache file.
+        $cacheEntry = new self(
+            $packageData['packageStatesConfiguration'],
+            $packageData['packageAliasMap'],
+            $packageData['composerNameToPackageKeyMap'],
+            unserialize(
+                $packageData['packageObjects'],
+                // data is read from `PackageStates.php` already, if that file is tainted for
+                // deserialization, code execution would have been possible anyway already
+                ['allowed_classes' => $packageData['packageClasses']],
+            ),
+        );
+        $cacheEntry->identifier = $packageData['identifier'] ?? null;
+
+        return $cacheEntry;
+    }
+
+    public function serialize(): string
+    {
+        $serializedPackages = serialize($this->packages);
+        $deserializationService = new DeserializationService();
+        return var_export(
+            [
+                'identifier' => $this->identifier,
+                'packageStatesConfiguration' => $this->configuration,
+                'packageAliasMap' => $this->aliasMap,
+                'composerNameToPackageKeyMap' => $this->composerNameMap,
+                'packageObjects' => $serializedPackages,
+                'packageClasses' => $deserializationService->parseClassNames($serializedPackages),
+            ],
+            true
+        );
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
+    }
+
+    public function withIdentifier(string $identifier): self
+    {
+        $newEntry = clone $this;
+        $newEntry->identifier = $identifier;
+
+        return $newEntry;
+    }
+
+    /**
+     * @return StatesConfiguration
+     */
+    public function getConfiguration(): array
+    {
+        return $this->configuration;
+    }
+
+    /**
+     * @return array<PackageName, PackageKey>
+     */
+    public function getAliasMap(): array
+    {
+        return $this->aliasMap;
+    }
+
+    /**
+     * @return array<PackageName, PackageKey>
+     */
+    public function getComposerNameMap(): array
+    {
+        return $this->composerNameMap;
+    }
+
+    /**
+     * @return array<PackageKey, PackageInterface>
+     */
+    public function getPackages(): array
+    {
+        return $this->packages;
+    }
+}
