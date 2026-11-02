@@ -6,6 +6,15 @@ page.10 {
     }
     dataProcessing {
         10 = page-content
+       20 = TYPO3\CMS\Frontend\DataProcessing\MenuProcessor
+20 {
+    as = mainMenu
+    special = list
+    special.value = 8,9
+    levels = 3
+    expandAll = 1
+    titleField = nav_title // title
+}
     }
 }
 config.contentObjectExceptionHandler = 0

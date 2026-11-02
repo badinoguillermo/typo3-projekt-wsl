@@ -5,6 +5,12 @@
     <title>Mein TYPO3-Projekt</title>
   </head>
   <body>
-    <f:render section="Main" />
+    <f:render partial="Header" arguments="{_all}" />
+
+    <main>
+      <f:render section="Main" />
+    </main>
+
+    <f:render partial="Footer" arguments="{_all}" />
   </body>
 </html>
