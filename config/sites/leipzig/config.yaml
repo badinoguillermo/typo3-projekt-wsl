@@ -1,6 +1,6 @@
 base: 'https://typo3-projekt.ddev.site/leipzig'
 dependencies:
-  - typo3/theme-camino
+  - guillermo/mein-site-package
 languages:
   -
     title: English

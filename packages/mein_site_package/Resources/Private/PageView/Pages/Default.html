@@ -1,0 +1,17 @@
+<f:layout name="PageLayout" />
+
+<f:section name="Main">
+  <h1>Mein TYPO3 Projekt (v14)</h1>
+
+  <f:if condition="{content.main.records}">
+    <f:for each="{content.main.records}" as="contentElement">
+      <f:if condition="{contentElement.mainType}">
+        <f:cObject
+          typoscriptObjectPath="{contentElement.mainType}"
+          table="{contentElement.mainType}"
+          data="{contentElement}"
+        />
+      </f:if>
+    </f:for>
+  </f:if>
+</f:section>

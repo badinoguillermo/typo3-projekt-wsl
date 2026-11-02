@@ -143,6 +143,7 @@ class ComposerStaticInit604feb0883ed11ba1fd9f782d2be38c6
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Guillermo\\MeinSitePackage\\' => 26,
         ),
         'F' =>
         array (
@@ -533,6 +534,10 @@ class ComposerStaticInit604feb0883ed11ba1fd9f782d2be38c6
         'GuzzleHttp\\' =>
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Guillermo\\MeinSitePackage\\' =>
+        array (
+            0 => __DIR__ . '/..' . '/guillermo/mein-site-package/Classes',
         ),
         'Firebase\\JWT\\' =>
         array (

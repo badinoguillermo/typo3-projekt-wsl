@@ -14,6 +14,7 @@
         "sort-packages": true
     },
     "require": {
+        "guillermo/mein-site-package": "@dev",
         "typo3/cms-backend": "^14.3",
         "typo3/cms-belog": "^14.3",
         "typo3/cms-beuser": "^14.3",
@@ -41,10 +42,16 @@
         "typo3/cms-workspaces": "^14.3",
         "typo3/theme-camino": "^14.3"
     },
-    "repositories": {
-        "packages": {
+    "repositories": [
+        {
+            "name": "site-package",
+            "type": "path",
+            "url": "packages/mein_site_package"
+        },
+        {
+            "name": "packages",
             "type": "path",
             "url": "./packages/*"
         }
-    }
+    ]
 }

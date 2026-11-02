@@ -1,0 +1,11 @@
+page = PAGE
+page.10 = PAGEVIEW
+page.10 {
+    paths {
+        100 = EXT:mein_site_package/Resources/Private/PageView/
+    }
+    dataProcessing {
+        10 = page-content
+    }
+}
+config.contentObjectExceptionHandler = 0

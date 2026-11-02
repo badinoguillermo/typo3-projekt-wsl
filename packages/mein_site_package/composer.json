@@ -1,0 +1,21 @@
+{
+  "name": "guillermo/mein-site-package",
+  "description": "Mein TYPO3 Site Package für die Einarbeitung",
+  "type": "typo3-cms-extension",
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "require": {
+    "typo3/cms-core": "^14"
+  },
+  "autoload": {
+    "psr-4": {
+      "Guillermo\\MeinSitePackage\\": "Classes/"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "mein_site_package"
+    }
+  }
+}
