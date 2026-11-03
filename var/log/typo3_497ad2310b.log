@@ -39,3 +39,5 @@ Tue, 03 Nov 2026 11:22:24 +0100 [ERROR] request="75367332f16b8" component="TYPO3
 Tue, 03 Nov 2026 11:22:27 +0100 [ERROR] request="82e9604935648" component="TYPO3.CMS.Core.Localization.Locales": Locale "de_DE" and  "de_DE" not found. 
 Tue, 03 Nov 2026 11:23:17 +0100 [ERROR] request="7c089124cfec8" component="TYPO3.CMS.Core.Localization.Locales": Locale "de_DE" and  "de_DE" not found. 
 Tue, 03 Nov 2026 11:23:19 +0100 [ERROR] request="705b42ee2ac17" component="TYPO3.CMS.Core.Localization.Locales": Locale "de_DE" and  "de_DE" not found. 
+Tue, 03 Nov 2026 11:43:38 +0100 [ERROR] request="265f60b53ded5" component="TYPO3.CMS.Core.Localization.Locales": Locale "de_DE" and  "de_DE" not found. 
+Tue, 03 Nov 2026 11:43:49 +0100 [ERROR] request="f4109fbb8e7b1" component="TYPO3.CMS.Core.Localization.Locales": Locale "de_DE" and  "de_DE" not found. 
