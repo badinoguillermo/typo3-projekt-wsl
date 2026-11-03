@@ -1,0 +1,28 @@
+<f:layout name="PageLayout" />
+<f:section name="Main">
+  <h1>{page.title}</h1>
+
+  <div class="two-columns-container">
+    <!-- Hauptspalte (colPos 0) -->
+    <div class="column-main">
+      <f:for each="{content.main.records}" as="contentElement">
+        <f:cObject
+          typoscriptObjectPath="{contentElement.mainType}"
+          table="{contentElement.mainType}"
+          data="{contentElement}"
+        />
+      </f:for>
+    </div>
+
+    <!-- Seitenspalte (colPos 1) -->
+    <div class="column-sidebar">
+      <f:for each="{content.sidebar.records}" as="contentElement">
+        <f:cObject
+          typoscriptObjectPath="{contentElement.mainType}"
+          table="{contentElement.mainType}"
+          data="{contentElement}"
+        />
+      </f:for>
+    </div>
+  </div>
+</f:section>

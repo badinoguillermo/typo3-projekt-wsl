@@ -1,0 +1,27 @@
+mod.web_layout.BackendLayouts {
+    two_columns {
+        title = Zwei Spalten (Test)
+        config {
+            backend_layout {
+                colCount = 2
+                rowCount = 1
+                rows {
+                    1 {
+                        columns {
+                            1 {
+                                name = Links
+                                colPos = 0
+                                identifier = main
+                            }
+                            2 {
+                                name = Rechts
+                                colPos = 1
+                                identifier = sidebar
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
