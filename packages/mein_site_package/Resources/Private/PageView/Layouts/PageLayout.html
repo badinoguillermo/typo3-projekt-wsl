@@ -5,6 +5,11 @@
     <title>Mein TYPO3-Projekt</title>
   </head>
   <body>
+    <f:render
+      partial="LanguageNavigation"
+      arguments="{languageNavigation: languageNavigation}"
+    />
+
     <f:render partial="Header" arguments="{_all}" />
 
     <main>

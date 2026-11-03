@@ -15,6 +15,12 @@ page.10 {
     expandAll = 1
     titleField = nav_title // title
 }
+   # Sprache  Menue
+        30 = language-menu
+        30 {
+            languages = auto
+            as = languageNavigation
+        }
     }
 }
 config.contentObjectExceptionHandler = 0
