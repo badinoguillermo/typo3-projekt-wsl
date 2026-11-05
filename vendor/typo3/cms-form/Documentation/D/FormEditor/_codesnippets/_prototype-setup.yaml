@@ -1,6 +1,0 @@
-prototypes:
-  standard:
-    formEditor:
-      dynamicJavaScriptModules:
-        additionalViewModelModules:
-          10: '@vendor/my-extension/backend/form-editor/view-model.js'

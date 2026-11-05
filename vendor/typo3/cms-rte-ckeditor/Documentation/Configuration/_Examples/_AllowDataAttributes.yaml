@@ -1,5 +1,0 @@
-editor:
-  config:
-    htmlSupport:
-      allow:
-        - { name: 'div', attributes: [ 'data-foobar' ] }
